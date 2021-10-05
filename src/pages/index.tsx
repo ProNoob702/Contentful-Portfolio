@@ -1,6 +1,7 @@
 import Layout from '../components/layout';
 import React from 'react';
 import { graphql } from 'gatsby';
+import { Button } from '@material-ui/core';
 
 // eslint-disable-next-line @typescript-eslint/no-explicit-any
 const IndexPage = ({ data }: any) => {
@@ -9,6 +10,9 @@ const IndexPage = ({ data }: any) => {
   return (
     <Layout pageTitle="welcome">
       <div>Hello tr!</div>
+      <Button variant="contained" color="primary">
+        HelloTrash
+      </Button>
     </Layout>
   );
 };

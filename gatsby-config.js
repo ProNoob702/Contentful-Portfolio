@@ -5,6 +5,7 @@ module.exports = {
   },
   plugins: [
     'gatsby-plugin-typescript',
+    `gatsby-theme-material-ui`,
     'gatsby-plugin-sass',
     {
       resolve: `gatsby-source-contentful`,
