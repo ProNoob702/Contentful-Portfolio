@@ -17,6 +17,9 @@ const theme = createTheme({
       default: `#fff`,
     },
   },
+  typography: {
+    fontFamily: ['Heebo', 'sans-serif'].join(','),
+  },
 });
 
 export default theme;
