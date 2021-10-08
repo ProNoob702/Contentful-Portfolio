@@ -1,7 +1,7 @@
 import { Divider, Drawer, IconButton, List, ListItem, ListItemText, makeStyles } from '@material-ui/core';
 import { Link } from 'gatsby';
 import React, { useState } from 'react';
-import { navigationData } from '.';
+import { navigationData } from '../../constants';
 import MenuIcon from '@material-ui/icons/Menu';
 
 const useStyles = makeStyles((theme) => ({

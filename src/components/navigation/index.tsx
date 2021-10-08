@@ -4,12 +4,6 @@ import { useIsMobileView } from '../../hooks/useIsMobileView';
 import MainNavigation from './mainNavigation';
 import MobileNavigation from './mobileNavigation';
 
-export const navigationData: { to: string; text: string }[] = [
-  { to: '/works/', text: 'Works' },
-  { to: '/blog/', text: 'Blog' },
-  { to: '/contact/', text: 'Contact' },
-];
-
 export const useStyles = makeStyles(() => ({
   container: {
     display: 'flex',

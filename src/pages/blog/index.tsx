@@ -1,11 +1,11 @@
 import Layout from '../../components/layout';
 import React from 'react';
-import { BlogConent } from '../../containers/blog/blogContent';
+import { BlogContent } from '../../containers/blog/blogContent';
 
 const BlogPage: React.FC<{}> = () => {
   return (
     <Layout>
-      <BlogConent />
+      <BlogContent />
     </Layout>
   );
 };

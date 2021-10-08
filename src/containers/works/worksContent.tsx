@@ -56,7 +56,7 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const BlogContent: React.FC<{}> = () => {
+export const WorksContent: React.FC<{}> = () => {
   const classes = useStyles();
   const posts = [1, 2, 3, 4, 5];
   const seperator = <span className={classes.seperator}>|</span>;
@@ -69,7 +69,7 @@ export const BlogContent: React.FC<{}> = () => {
         {posts.map((x) => (
           <>
             <div className={classes.blogItem}>
-              <Link to={`/blog/${x}`} className={classes.blogItemLink}>
+              <Link to={`/works/${x}`} className={classes.blogItemLink}>
                 <Typography variant="h5" className={clsx(classes.blogItemTitle, classes.txtSpacing)}>
                   UI Interactions of the week
                 </Typography>

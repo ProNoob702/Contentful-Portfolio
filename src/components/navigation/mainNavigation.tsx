@@ -1,7 +1,7 @@
 import { makeStyles } from '@material-ui/core';
 import { Link } from 'gatsby';
 import React from 'react';
-import { navigationData } from '.';
+import { navigationData } from '../../constants';
 
 const useStyles = makeStyles(({ typography, palette }) => ({
   container: {
