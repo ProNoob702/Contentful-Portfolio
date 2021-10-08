@@ -84,7 +84,7 @@ const useFeaturedWorksSideStyles = makeStyles((theme) => ({
   },
 }));
 
-const imgSrc =
+export const imgSrc =
   'https://s3-alpha-sig.figma.com/img/1c6b/bc0b/e719e9d93c02a87ba51308ebb0297cdf?Expires=1634515200&Signature=cHog-gg-LHnZ7Jar-4LBIvEyoSBxR3KrXMF9mU3M1pPPPn44uChuJ4GVz1R96FsJKwMN7-6GcPep9h9JMgb7bW3dfcl56gVnZ6~7SrsFtNvjg0MHRylpstxbh~8Ds94guK09AkHaNicuiBLALimwy7sA~pbFzzEG9NlMIHseaBMQ9Sq47xcZCYz-bDE6hH2KDWtIqOpZ9WRvkNG7fBjhXCm3sdKMg5JsarcBfCshLJFCLJCGpAxAMF36AP4A8e5Tr1wIcl4oHHX4~sdwtNZRAWABWJhNxmc14hCiWX1yZvfU8e~y5-MMh0DJhVdQBnK5Lq9xocs-LAqsx7lDo-shvg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA';
 
 export const FeaturedWorksSide: React.FC<{}> = ({}) => {

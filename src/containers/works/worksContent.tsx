@@ -1,9 +1,10 @@
 import React from 'react';
-import { makeStyles, Typography } from '@material-ui/core';
+import { Chip, ListItem, ListItemText, makeStyles, Typography } from '@material-ui/core';
 import { contentMaxWidth } from '../../constants';
 import clsx from 'clsx';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
+import { imgSrc } from '../home/FeaturedWorksSide';
 import { Link } from 'gatsby';
 
 const useStyles = makeStyles((theme) => ({
@@ -22,34 +23,70 @@ const useStyles = makeStyles((theme) => ({
     fontWeight: 700,
     marginBottom: theme.spacing(3),
   },
-  blogList: {
+  worksList: {
     [theme.breakpoints.down('sm')]: {
       justifyContent: 'center',
+      paddingTop: 0,
+    },
+    [theme.breakpoints.up('sm')]: {
+      paddingTop: theme.spacing(3),
     },
   },
-  seperator: {
-    margin: theme.spacing(0, 2),
-  },
-  blogItemLink: {
-    border: 'none',
-    display: 'inline-block',
-    textDecoration: 'none',
-    color: theme.palette.text.primary,
-  },
-  blogItem: {
-    display: 'flex',
-    flexDirection: 'column',
+  workItem: {
     padding: `${theme.spacing(3)}px 0px ${theme.spacing(3)}px 0px`,
     cursor: 'pointer',
     '&:hover': {
       background: theme.palette.action.hover,
     },
   },
-  blogItemTitle: {
-    fontWeight: 500,
+  itemLink: {
+    border: 'none',
+    textDecoration: 'none',
+    color: theme.palette.text.primary,
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+      marginRight: 0,
+    },
+    display: 'flex',
   },
-  txtSpacing: {
-    marginBottom: theme.spacing(1),
+  workItemImg: {
+    [theme.breakpoints.down('md')]: {
+      width: '100%',
+    },
+    [theme.breakpoints.up('md')]: {
+      width: 250,
+    },
+    height: 180,
+    overflow: 'hidden',
+    borderRadius: 5,
+    backgroundSize: 'cover',
+    marginRight: theme.spacing(2),
+  },
+  workItemText: {
+    padding: 0,
+    margin: 0,
+  },
+  workItemPrimaryText: {
+    [theme.breakpoints.down('sm')]: {
+      fontSize: '24px',
+      lineHeight: '24px',
+      marginTop: theme.spacing(2),
+    },
+    fontSize: '30px',
+    lineHeight: '30px',
+    fontWeight: 700,
+    marginBottom: theme.spacing(2),
+  },
+  workItemMiddleSide: {
+    marginBottom: theme.spacing(2),
+  },
+  workItemChip: {
+    background: '#142850',
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 700,
+    height: 'unset',
+    marginRight: theme.spacing(2),
   },
   itemDivider: {
     color: theme.palette.grey[300],
@@ -59,33 +96,43 @@ const useStyles = makeStyles((theme) => ({
 export const WorksContent: React.FC<{}> = () => {
   const classes = useStyles();
   const posts = [1, 2, 3, 4, 5];
-  const seperator = <span className={classes.seperator}>|</span>;
   return (
     <div className={classes.container}>
       <Typography variant="h4" className={classes.pageTitle}>
-        Blog
+        Works
       </Typography>
-      <List className={classes.blogList}>
+      <List className={classes.worksList}>
         {posts.map((x) => (
           <>
-            <div className={classes.blogItem}>
-              <Link to={`/works/${x}`} className={classes.blogItemLink}>
-                <Typography variant="h5" className={clsx(classes.blogItemTitle, classes.txtSpacing)}>
-                  UI Interactions of the week
-                </Typography>
-                <div className={clsx('flexRow', classes.txtSpacing)}>
-                  <Typography variant="body1">12 Feb 2020</Typography>
-                  {seperator}
-                  <Typography variant="body1" color="textSecondary">
-                    Design Pattern
-                  </Typography>
-                </div>
-                <Typography variant="body2" component="p">
-                  Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis
-                  enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-                </Typography>
+            <ListItem className={classes.workItem} alignItems="flex-start">
+              <Link to={`/works/${x}`} className={classes.itemLink}>
+                <div
+                  className={classes.workItemImg}
+                  style={{
+                    backgroundImage: `url("${imgSrc}")`,
+                  }}
+                ></div>
+                <ListItemText
+                  primary="Brunch this weekend?"
+                  className={classes.workItemText}
+                  primaryTypographyProps={{
+                    className: classes.workItemPrimaryText,
+                  }}
+                  secondary={
+                    <>
+                      <div className={clsx(classes.workItemMiddleSide, 'flexStartCenterRow')}>
+                        <Chip label="2018" className={classes.workItemChip} />
+                        <Typography variant="body1">Illustration</Typography>
+                      </div>
+                      <Typography variant="body2" component="p" color="textPrimary">
+                        Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
+                        consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                      </Typography>
+                    </>
+                  }
+                />
               </Link>
-            </div>
+            </ListItem>
             <Divider className={classes.itemDivider} />
           </>
         ))}

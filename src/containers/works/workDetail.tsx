@@ -1,6 +1,7 @@
 import React from 'react';
-import { makeStyles, Typography } from '@material-ui/core';
-import { contentMaxWidth } from '../../constants';
+import { Chip, makeStyles, Typography } from '@material-ui/core';
+import { contentMaxWidth, sampleMarkdown } from '../../constants';
+import marked from 'marked';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -21,66 +22,46 @@ const useStyles = makeStyles((theme) => ({
   dateInfo: {
     marginRight: theme.spacing(3),
   },
+  workChip: {
+    color: 'white',
+    fontSize: 16,
+    fontWeight: 700,
+    height: 'unset',
+    marginRight: theme.spacing(3),
+  },
   postDes: {
     marginTop: theme.spacing(3),
+    whiteSpace: 'pre-wrap',
+    '& img': {
+      width: '100%',
+    },
+    '& p': {
+      fontSize: 16,
+      fontWeight: 400,
+    },
+    '& h1': {
+      fontSize: 30,
+    },
+    '& h2': {
+      fontSize: 24,
+    },
   },
 }));
 
+const html = marked(sampleMarkdown || '');
 export const WorkDetail: React.FC<{}> = () => {
   const classes = useStyles();
   return (
     <div className={classes.container}>
       <Typography variant="h4" className={classes.pageTitle}>
-        Shams FM
+        Brunch this weekend?
       </Typography>
       <div className="flexRow">
-        <Typography variant="body1" className={classes.dateInfo}>
-          12 Feb 2020
-        </Typography>
-        <Typography variant="body1" color="textSecondary">
-          Design Pattern
-        </Typography>
+        <Chip label="2018" className={classes.workChip} color="primary" />
+        <Typography variant="body1">Illustration</Typography>
       </div>
       <div className={classes.postDes}>
-        <Typography variant="body1" component="p">
-          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim
-          velit mollit. Exercitation veniam consequat sunt nostrud amet.
-          <br /> Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis
-          enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est
-          sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat
-          sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
-          consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non
-          deserunt ullamco est sit aliqua dolor do amet sint. <br /> Velit officia consequat duis enim velit mollit.
-          Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor
-          do amet sint. Velit officia consequat duis enim velit mollit.
-          <br />
-          <br /> Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua
-          dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud
-          amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis
-          enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est
-          sit aliqua dolor do amet sint. <br /> Velit officia consequat duis enim velit mollit. Exercitation veniam
-          consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-          officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-          <br />
-          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim
-          velit mollit. Exercitation veniam consequat sunt nostrud amet.
-          <br /> Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis
-          enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est
-          sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat
-          sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
-          consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non
-          deserunt ullamco est sit aliqua dolor do amet sint. <br /> Velit officia consequat duis enim velit mollit.
-          Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor
-          do amet sint. Velit officia consequat duis enim velit mollit.
-          <br />
-          <br /> Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua
-          dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud
-          amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis
-          enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est
-          sit aliqua dolor do amet sint. <br /> Velit officia consequat duis enim velit mollit. Exercitation veniam
-          consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-          officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-        </Typography>
+        <div dangerouslySetInnerHTML={{ __html: html }} />
       </div>
     </div>
   );
