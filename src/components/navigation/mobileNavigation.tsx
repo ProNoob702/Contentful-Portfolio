@@ -4,7 +4,7 @@ import React, { useState } from 'react';
 import { navigationData } from '.';
 import MenuIcon from '@material-ui/icons/Menu';
 
-export const useStyles = makeStyles((theme) => ({
+const useStyles = makeStyles((theme) => ({
   container: {
     display: 'flex',
     flex: 1,
@@ -31,7 +31,7 @@ export const useStyles = makeStyles((theme) => ({
     },
   },
   navLinkActive: {
-    color: '#FF6464',
+    color: theme.palette.primary.main,
   },
 }));
 
@@ -45,11 +45,9 @@ const MobileNavigation: React.FC<{}> = () => {
   return (
     <div className={classes.container}>
       <span className="takeTheRest" />
-      {/* <ClickAwayListener onClickAway={() => setAnchor(null)}> */}
       <IconButton onClick={handleClick} aria-label="nav">
         <MenuIcon fontSize="large" />
       </IconButton>
-      {/* </ClickAwayListener> */}
       <MobileNavigationMenu anchor={anchor} classes={classes} handleClose={handleClose} />
     </div>
   );
@@ -68,14 +66,14 @@ const MobileNavigationMenu: React.FC<MenuProps> = ({ anchor, classes, handleClos
       <div className={classes.menu}>
         <List disablePadding>
           {navigationData.map((link, i) => (
-            <>
-              <Link to={link.to} className={classes.navLink} activeClassName={classes.navLinkActive} key={i}>
+            <div key={i}>
+              <Link to={link.to} className={classes.navLink} activeClassName={classes.navLinkActive}>
                 <ListItem className="flexCenterRow linkBtn" button>
                   <ListItemText className="linkText" primary={link.text} />
                 </ListItem>
               </Link>
               <Divider />
-            </>
+            </div>
           ))}
         </List>
       </div>

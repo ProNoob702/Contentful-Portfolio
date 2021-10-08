@@ -1,22 +1,16 @@
 import React from 'react';
 import '../theme/index.scss';
+import { Footer } from './footer/footer';
 import { Navigation } from './navigation';
 
-interface Props {
-  pageTitle: string;
-}
+interface Props {}
 
-const Layout: React.FC<Props> = ({ pageTitle, children }) => {
+const Layout: React.FC<Props> = ({ children }) => {
   return (
-    <div className="layout">
+    <div className="layout flexColumn">
       <Navigation />
-      {/* <main className="content">
-        <h1>{pageTitle}</h1>
-        {children}
-      </main>
-      <footer>
-        <p>Copyright 2021 Web Warrior</p>
-      </footer> */}
+      <main className="content takeTheRest">{children}</main>
+      <Footer />
     </div>
   );
 };

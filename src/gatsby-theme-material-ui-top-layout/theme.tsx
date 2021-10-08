@@ -1,21 +1,20 @@
-import red from '@material-ui/core/colors/red';
 import { createTheme } from '@material-ui/core';
 
 // A custom theme for this app
 const theme = createTheme({
   palette: {
     primary: {
-      main: `#556cd6`,
+      main: `#FF6464`,
     },
     secondary: {
-      main: `#19857b`,
+      main: `#00A8CC`,
     },
-    error: {
-      main: red.A400,
-    },
-    background: {
-      default: `#fff`,
-    },
+    // error: {
+    //   main: red.A400,
+    // },
+    // background: {
+    //   default: `#fff`,
+    // },
   },
   typography: {
     fontFamily: ['Heebo', 'sans-serif'].join(','),

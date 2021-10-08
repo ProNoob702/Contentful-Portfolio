@@ -1,9 +1,9 @@
 import Layout from '../components/layout';
 import React from 'react';
 
-const FailPage = ({ data }: any) => {
+const FailPage = () => {
   return (
-    <Layout pageTitle="welcome">
+    <Layout>
       <div>Failed</div>
     </Layout>
   );

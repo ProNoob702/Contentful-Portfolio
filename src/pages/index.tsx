@@ -1,18 +1,18 @@
 import Layout from '../components/layout';
 import React from 'react';
 import { graphql } from 'gatsby';
-import { Button } from '@material-ui/core';
+import { FeaturedWorksSide } from '../containers/home/FeaturedWorksSide';
+import { RecentPostsSide } from '../containers/home/RecentPostsSide';
+import { IntroSide } from '../containers/home/IntroSide';
 
-// eslint-disable-next-line @typescript-eslint/no-explicit-any
-const IndexPage = ({ data }: any) => {
+const IndexPage: React.FC<{ data: any }> = ({ data }) => {
   // eslint-disable-next-line no-console
-  console.log('coucou', data);
+  // console.log('coucou', data);
   return (
-    <Layout pageTitle="welcome">
-      <div>Hello tr!</div>
-      <Button variant="contained" color="primary">
-        HelloTrash
-      </Button>
+    <Layout>
+      <IntroSide />
+      <RecentPostsSide />
+      <FeaturedWorksSide />
     </Layout>
   );
 };

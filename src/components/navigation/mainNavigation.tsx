@@ -3,7 +3,7 @@ import { Link } from 'gatsby';
 import React from 'react';
 import { navigationData } from '.';
 
-export const useStyles = makeStyles(({ typography, palette }) => ({
+const useStyles = makeStyles(({ typography, palette }) => ({
   container: {
     display: 'flex',
     flex: 1,
@@ -23,7 +23,7 @@ export const useStyles = makeStyles(({ typography, palette }) => ({
     fontWeight: 500,
   },
   navLinkActive: {
-    color: '#FF6464',
+    color: palette.primary.main,
   },
 }));
 

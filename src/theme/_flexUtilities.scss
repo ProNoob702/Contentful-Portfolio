@@ -126,3 +126,9 @@
   display: flex;
   width: 100%;
 }
+
+.flexColumnReverse {
+  display: flex;
+  flex-direction: column-reverse;
+  align-items: center;
+}
