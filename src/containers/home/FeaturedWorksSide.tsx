@@ -9,6 +9,7 @@ import ListItemText from '@material-ui/core/ListItemText';
 import { contentMaxWidth } from '../../constants';
 import { useWorksList } from '../../hooks/useWorksList';
 import { getYear } from 'date-fns';
+import { Link } from 'gatsby';
 
 const useFeaturedWorksSideStyles = makeStyles((theme) => ({
   container: {},
@@ -85,6 +86,16 @@ const useFeaturedWorksSideStyles = makeStyles((theme) => ({
     color: theme.palette.grey[300],
     margin: theme.spacing(1, 0),
   },
+  itemLink: {
+    border: 'none',
+    textDecoration: 'none',
+    color: theme.palette.text.primary,
+    [theme.breakpoints.down('sm')]: {
+      flexDirection: 'column',
+      marginRight: 0,
+    },
+    display: 'flex',
+  },
 }));
 
 export const FeaturedWorksSide: React.FC<{}> = ({}) => {
@@ -101,30 +112,32 @@ export const FeaturedWorksSide: React.FC<{}> = ({}) => {
           {featuredWorks.map((work, i) => (
             <div key={i}>
               <ListItem className={classes.workItem} alignItems="flex-start">
-                <div
-                  className={classes.workItemImg}
-                  style={{
-                    backgroundImage: `url(${work.workImage.file.url})`,
-                  }}
-                ></div>
-                <ListItemText
-                  primary={work.name}
-                  className={classes.workItemText}
-                  primaryTypographyProps={{
-                    className: classes.workItemPrimaryText,
-                  }}
-                  secondary={
-                    <>
-                      <span className={clsx(classes.workItemMiddleSide, 'flexStartCenterRow')}>
-                        <Chip label={getYear(new Date(work.postedOn))} className={classes.workItemChip} />
-                        <Typography variant="body1">{work.category}</Typography>
-                      </span>
-                      <Typography variant="body2" component="p" color="textPrimary">
-                        {work.description.description}
-                      </Typography>
-                    </>
-                  }
-                />
+                <Link to={`/works/${work.id}`} className={classes.itemLink}>
+                  <div
+                    className={classes.workItemImg}
+                    style={{
+                      backgroundImage: `url(${work.workImage.file.url})`,
+                    }}
+                  ></div>
+                  <ListItemText
+                    primary={work.name}
+                    className={classes.workItemText}
+                    primaryTypographyProps={{
+                      className: classes.workItemPrimaryText,
+                    }}
+                    secondary={
+                      <>
+                        <span className={clsx(classes.workItemMiddleSide, 'flexStartCenterRow')}>
+                          <Chip label={getYear(new Date(work.postedOn))} className={classes.workItemChip} />
+                          <Typography variant="body1">{work.category}</Typography>
+                        </span>
+                        <Typography variant="body2" component="p" color="textPrimary">
+                          {work.description.description}
+                        </Typography>
+                      </>
+                    }
+                  />
+                </Link>
               </ListItem>
               <Divider className={classes.itemDivider} />
             </div>

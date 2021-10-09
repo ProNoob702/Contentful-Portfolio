@@ -54,6 +54,12 @@ const useRecentPostsSideStyles = makeStyles((theme) => ({
   txtSpacing: {
     marginBottom: theme.spacing(2),
   },
+  blogItemLink: {
+    border: 'none',
+    display: 'inline-block',
+    textDecoration: 'none',
+    color: theme.palette.text.primary,
+  },
 }));
 
 export const RecentPostsSide: React.FC<{}> = ({}) => {
@@ -87,17 +93,19 @@ export const RecentPostsSide: React.FC<{}> = ({}) => {
         <div className={clsx(isNotMobileView ? 'flexStartCenterRow flexWrap' : 'flexColumnCenterCenter')}>
           {latestPosts.map((post, i) => (
             <Card className={clsx(classes.card, 'flex-1', getCardClassNameByIndex(i, 2))} key={i}>
-              <CardContent>
-                <Typography variant="h5" className={clsx(classes.cardTitle, classes.txtSpacing)}>
-                  {post.name}
-                </Typography>
-                <Typography variant="body1" className={classes.txtSpacing}>
-                  {format(new Date(post.postedOn), 'dd MMM YYY')} {seperator} {post.theme}
-                </Typography>
-                <Typography variant="body2" component="p">
-                  {post.description.description}
-                </Typography>
-              </CardContent>
+              <Link to={`/blog/${post.id}`} className={classes.blogItemLink}>
+                <CardContent>
+                  <Typography variant="h5" className={clsx(classes.cardTitle, classes.txtSpacing)}>
+                    {post.name}
+                  </Typography>
+                  <Typography variant="body1" className={classes.txtSpacing}>
+                    {format(new Date(post.postedOn), 'dd MMM YYY')} {seperator} {post.theme}
+                  </Typography>
+                  <Typography variant="body2" component="p">
+                    {post.description.description}
+                  </Typography>
+                </CardContent>
+              </Link>
             </Card>
           ))}
         </div>
