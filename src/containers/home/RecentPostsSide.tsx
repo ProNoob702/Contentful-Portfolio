@@ -68,7 +68,7 @@ export const RecentPostsSide: React.FC<{}> = ({}) => {
     return null;
   };
   const list = usePostsList();
-  const latestPosts = list.slice(list.length - 2);
+  const latestPosts = list.slice(0, 2);
   const seperator = <span className={classes.seperator}>|</span>;
   return (
     <div className={classes.container}>

@@ -2,9 +2,8 @@ import Layout from '../components/layout';
 import React from 'react';
 import { BlogPost } from '../containers/blog/blogPost';
 import { graphql } from 'gatsby';
-import { BlogPostType } from '../models/BlogPost';
+import { BlogPostType } from '../models/BlogPostType';
 
-// {params.id}
 interface Props {
   params: { id: string };
   data: { contentfulBlogs: BlogPostType };
@@ -20,13 +19,15 @@ export const query = graphql`
       description {
         description
       }
+      markdownText {
+        markdownText
+      }
     }
   }
 `;
 
 const BlogPostDetail: React.FC<Props> = (props) => {
-  const { params, data } = props;
-  console.log('🌝', params.id);
+  const { data } = props;
   return (
     <Layout>
       <BlogPost post={data.contentfulBlogs} />

@@ -1,5 +1,5 @@
 import { graphql, useStaticQuery } from 'gatsby';
-import { BlogPostType } from '../models/BlogPost';
+import { BlogPostType } from '../models/BlogPostType';
 
 export const usePostsList = (): BlogPostType[] => {
   const data = useStaticQuery(

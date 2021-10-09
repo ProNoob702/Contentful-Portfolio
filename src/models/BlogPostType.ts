@@ -6,4 +6,7 @@ export interface BlogPostType {
   description: {
     description: string;
   };
+  markdownText: {
+    markdownText: string;
+  };
 }

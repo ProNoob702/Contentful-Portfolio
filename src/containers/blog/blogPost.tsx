@@ -1,8 +1,9 @@
 import React from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
 import { contentMaxWidth } from '../../constants';
-import { BlogPostType } from '../../models/BlogPost';
+import { BlogPostType } from '../../models/BlogPostType';
 import { format } from 'date-fns';
+import marked from 'marked';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -25,12 +26,30 @@ const useStyles = makeStyles((theme) => ({
   },
   postDes: {
     marginTop: theme.spacing(3),
+    whiteSpace: 'pre-wrap',
+    '& img': {
+      width: '100%',
+    },
+    '& p': {
+      fontSize: 16,
+      fontWeight: 400,
+    },
+    '& h1': {
+      fontSize: 30,
+    },
+    '& h2': {
+      fontSize: 24,
+    },
+    '& pre': {
+      background: theme.palette.grey[200],
+      padding: theme.spacing(1),
+    },
   },
 }));
 
 export const BlogPost: React.FC<{ post: BlogPostType }> = ({ post }) => {
   const classes = useStyles();
-  console.log('post', post);
+  const html = marked(post.markdownText.markdownText || ''); // post.markdownText
   return (
     <div className={classes.container}>
       <Typography variant="h4" className={classes.pageTitle}>
@@ -45,9 +64,7 @@ export const BlogPost: React.FC<{ post: BlogPostType }> = ({ post }) => {
         </Typography>
       </div>
       <div className={classes.postDes}>
-        <Typography variant="body1" component="p">
-          {post.description.description}
-        </Typography>
+        <div dangerouslySetInnerHTML={{ __html: html }} />
       </div>
     </div>
   );
