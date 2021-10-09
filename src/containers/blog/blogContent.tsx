@@ -5,6 +5,8 @@ import clsx from 'clsx';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'gatsby';
+import { usePostsList } from '../../hooks/usePostsList';
+import { format } from 'date-fns';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -58,7 +60,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const BlogContent: React.FC<{}> = () => {
   const classes = useStyles();
-  const posts = [1, 2, 3, 4, 5];
+  const posts = usePostsList();
   const seperator = <span className={classes.seperator}>|</span>;
   return (
     <div className={classes.container}>
@@ -67,27 +69,26 @@ export const BlogContent: React.FC<{}> = () => {
       </Typography>
       <List className={classes.blogList}>
         {posts.map((x) => (
-          <>
+          <div key={x.id}>
             <div className={classes.blogItem}>
-              <Link to={`/blog/${x}`} className={classes.blogItemLink}>
+              <Link to={`/blog/${x.id}`} className={classes.blogItemLink}>
                 <Typography variant="h5" className={clsx(classes.blogItemTitle, classes.txtSpacing)}>
-                  UI Interactions of the week
+                  {x.name}
                 </Typography>
                 <div className={clsx('flexRow', classes.txtSpacing)}>
-                  <Typography variant="body1">12 Feb 2020</Typography>
+                  <Typography variant="body1">{format(new Date(x.postedOn), 'dd MMM YYY')}</Typography>
                   {seperator}
                   <Typography variant="body1" color="textSecondary">
-                    Design Pattern
+                    {x.theme}
                   </Typography>
                 </div>
                 <Typography variant="body2" component="p">
-                  Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis
-                  enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                  {x.description.description}
                 </Typography>
               </Link>
             </div>
             <Divider className={classes.itemDivider} />
-          </>
+          </div>
         ))}
       </List>
     </div>

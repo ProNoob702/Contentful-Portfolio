@@ -99,17 +99,14 @@ export const useWorksList = () => {
               description {
                 description
               }
+              createdAt
               id
               name
-              postedOn
               workImage {
-                description
                 id
-                title
-                file {
-                  fileName
-                  url
-                }
+              }
+              workMarkdownText {
+                raw
               }
             }
           }
@@ -121,50 +118,53 @@ export const useWorksList = () => {
 };
 
 export const FeaturedWorksSide: React.FC<{}> = ({}) => {
-  const classes = useFeaturedWorksSideStyles();
-  const works = useWorksList();
-  const featuredWorks = works?.slice(works.length - 3);
-  return (
-    <div className={classes.container}>
-      <div className={classes.containerInner}>
-        <div className={clsx('flexRow', classes.upperSide)}>
-          <Typography variant="h6">Featured works</Typography>
-        </div>
-        <List className={classes.worksList}>
-          {featuredWorks.map((work, i) => (
-            <div key={i}>
-              <ListItem className={classes.workItem} alignItems="flex-start">
-                <div
-                  className={classes.workItemImg}
-                  style={{
-                    backgroundImage: `url("")`,
-                  }}
-                ></div>
-                <ListItemText
-                  primary={work.name}
-                  className={classes.workItemText}
-                  primaryTypographyProps={{
-                    className: classes.workItemPrimaryText,
-                  }}
-                  secondary={
-                    <>
-                      <span className={clsx(classes.workItemMiddleSide, 'flexStartCenterRow')}>
-                        <Chip label={work.postedOn} className={classes.workItemChip} />
-                        <Typography variant="body1">work.</Typography>
-                      </span>
-                      <Typography variant="body2" component="p" color="textPrimary">
-                        Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
-                        consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-                      </Typography>
-                    </>
-                  }
-                />
-              </ListItem>
-              <Divider className={classes.itemDivider} />
-            </div>
-          ))}
-        </List>
-      </div>
-    </div>
-  );
+  return null;
 };
+// export const FeaturedWorksSide: React.FC<{}> = ({}) => {
+//   const classes = useFeaturedWorksSideStyles();
+//   const works = [1, 3, 4, 5];
+//   const featuredWorks = works?.slice(works.length - 3);
+//   return (
+//     <div className={classes.container}>
+//       <div className={classes.containerInner}>
+//         <div className={clsx('flexRow', classes.upperSide)}>
+//           <Typography variant="h6">Featured works</Typography>
+//         </div>
+//         <List className={classes.worksList}>
+//           {featuredWorks.map((work, i) => (
+//             <div key={i}>
+//               <ListItem className={classes.workItem} alignItems="flex-start">
+//                 <div
+//                   className={classes.workItemImg}
+//                   style={{
+//                     backgroundImage: `url("")`,
+//                   }}
+//                 ></div>
+//                 <ListItemText
+//                   primary={work.name}
+//                   className={classes.workItemText}
+//                   primaryTypographyProps={{
+//                     className: classes.workItemPrimaryText,
+//                   }}
+//                   secondary={
+//                     <>
+//                       <span className={clsx(classes.workItemMiddleSide, 'flexStartCenterRow')}>
+//                         <Chip label={work.postedOn} className={classes.workItemChip} />
+//                         <Typography variant="body1">work.</Typography>
+//                       </span>
+//                       <Typography variant="body2" component="p" color="textPrimary">
+//                         Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
+//                         consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+//                       </Typography>
+//                     </>
+//                   }
+//                 />
+//               </ListItem>
+//               <Divider className={classes.itemDivider} />
+//             </div>
+//           ))}
+//         </List>
+//       </div>
+//     </div>
+//   );
+// };

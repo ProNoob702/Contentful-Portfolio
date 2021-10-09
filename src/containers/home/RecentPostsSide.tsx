@@ -3,10 +3,12 @@ import { useIsMobileView } from '../../hooks/useIsMobileView';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
-import { graphql, Link, useStaticQuery } from 'gatsby';
+import { Link } from 'gatsby';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { contentMaxWidth } from '../../constants';
+import { usePostsList } from '../../hooks/usePostsList';
+import { format } from 'date-fns';
 
 const useRecentPostsSideStyles = makeStyles((theme) => ({
   container: {
@@ -54,32 +56,6 @@ const useRecentPostsSideStyles = makeStyles((theme) => ({
   },
 }));
 
-export const usePostsList = () => {
-  const data = useStaticQuery(
-    graphql`
-      {
-        allContentfulBlogs {
-          edges {
-            node {
-              id
-              name
-              postedOn
-              theme
-              description {
-                description
-              }
-              postMarkdownText {
-                raw
-              }
-            }
-          }
-        }
-      }
-    `,
-  );
-  return data;
-};
-
 export const RecentPostsSide: React.FC<{}> = ({}) => {
   const isNotMobileView = useIsMobileView();
   const classes = useRecentPostsSideStyles();
@@ -91,10 +67,7 @@ export const RecentPostsSide: React.FC<{}> = ({}) => {
     }
     return null;
   };
-  const data = usePostsList();
-  const list = data?.allContentfulBlogs?.edges?.map((x) => x.node);
-  console.log('list', list);
-  // const posts = [1, 2, 3, 4, 5];
+  const list = usePostsList();
   const latestPosts = list.slice(list.length - 2);
   const seperator = <span className={classes.seperator}>|</span>;
   return (
@@ -119,7 +92,7 @@ export const RecentPostsSide: React.FC<{}> = ({}) => {
                   {post.name}
                 </Typography>
                 <Typography variant="body1" className={classes.txtSpacing}>
-                  {post.postedOn} {seperator} {post.theme}
+                  {format(new Date(post.postedOn), 'dd MMM YYY')} {seperator} {post.theme}
                 </Typography>
                 <Typography variant="body2" component="p">
                   {post.description.description}

@@ -4,7 +4,6 @@ import { contentMaxWidth } from '../../constants';
 import clsx from 'clsx';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
-import { imgSrc } from '../home/FeaturedWorksSide';
 import { Link } from 'gatsby';
 
 const useStyles = makeStyles((theme) => ({
@@ -109,7 +108,7 @@ export const WorksContent: React.FC<{}> = () => {
                 <div
                   className={classes.workItemImg}
                   style={{
-                    backgroundImage: `url("${imgSrc}")`,
+                    backgroundImage: `url("")`,
                   }}
                 ></div>
                 <ListItemText

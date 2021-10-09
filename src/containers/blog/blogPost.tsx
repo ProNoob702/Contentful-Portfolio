@@ -1,6 +1,8 @@
 import React from 'react';
 import { makeStyles, Typography } from '@material-ui/core';
 import { contentMaxWidth } from '../../constants';
+import { BlogPostType } from '../../models/BlogPost';
+import { format } from 'date-fns';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -26,60 +28,25 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-export const BlogPost: React.FC<{}> = () => {
+export const BlogPost: React.FC<{ post: BlogPostType }> = ({ post }) => {
   const classes = useStyles();
+  console.log('post', post);
   return (
     <div className={classes.container}>
       <Typography variant="h4" className={classes.pageTitle}>
-        UI Interactions of the week
+        {post.name}
       </Typography>
       <div className="flexRow">
         <Typography variant="body1" className={classes.dateInfo}>
-          12 Feb 2020
+          {format(new Date(post.postedOn), 'dd MMM YYY')}
         </Typography>
         <Typography variant="body1" color="textSecondary">
-          Design Pattern
+          {post.theme}
         </Typography>
       </div>
       <div className={classes.postDes}>
         <Typography variant="body1" component="p">
-          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim
-          velit mollit. Exercitation veniam consequat sunt nostrud amet.
-          <br /> Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis
-          enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est
-          sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat
-          sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
-          consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non
-          deserunt ullamco est sit aliqua dolor do amet sint. <br /> Velit officia consequat duis enim velit mollit.
-          Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor
-          do amet sint. Velit officia consequat duis enim velit mollit.
-          <br />
-          <br /> Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua
-          dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud
-          amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis
-          enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est
-          sit aliqua dolor do amet sint. <br /> Velit officia consequat duis enim velit mollit. Exercitation veniam
-          consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-          officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
-          <br />
-          Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis enim
-          velit mollit. Exercitation veniam consequat sunt nostrud amet.
-          <br /> Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis
-          enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est
-          sit aliqua dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat
-          sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
-          consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non
-          deserunt ullamco est sit aliqua dolor do amet sint. <br /> Velit officia consequat duis enim velit mollit.
-          Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor
-          do amet sint. Velit officia consequat duis enim velit mollit.
-          <br />
-          <br /> Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua
-          dolor do amet sint. Velit officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud
-          amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis
-          enim velit mollit. Exercitation veniam consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est
-          sit aliqua dolor do amet sint. <br /> Velit officia consequat duis enim velit mollit. Exercitation veniam
-          consequat sunt nostrud amet. Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit
-          officia consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+          {post.description.description}
         </Typography>
       </div>
     </div>
