@@ -7,6 +7,7 @@ import ListItem from '@material-ui/core/ListItem';
 import Divider from '@material-ui/core/Divider';
 import ListItemText from '@material-ui/core/ListItemText';
 import { contentMaxWidth } from '../../constants';
+import { graphql, useStaticQuery } from 'gatsby';
 
 const useFeaturedWorksSideStyles = makeStyles((theme) => ({
   container: {},
@@ -84,13 +85,45 @@ const useFeaturedWorksSideStyles = makeStyles((theme) => ({
   },
 }));
 
-export const imgSrc =
-  'https://s3-alpha-sig.figma.com/img/1c6b/bc0b/e719e9d93c02a87ba51308ebb0297cdf?Expires=1634515200&Signature=cHog-gg-LHnZ7Jar-4LBIvEyoSBxR3KrXMF9mU3M1pPPPn44uChuJ4GVz1R96FsJKwMN7-6GcPep9h9JMgb7bW3dfcl56gVnZ6~7SrsFtNvjg0MHRylpstxbh~8Ds94guK09AkHaNicuiBLALimwy7sA~pbFzzEG9NlMIHseaBMQ9Sq47xcZCYz-bDE6hH2KDWtIqOpZ9WRvkNG7fBjhXCm3sdKMg5JsarcBfCshLJFCLJCGpAxAMF36AP4A8e5Tr1wIcl4oHHX4~sdwtNZRAWABWJhNxmc14hCiWX1yZvfU8e~y5-MMh0DJhVdQBnK5Lq9xocs-LAqsx7lDo-shvg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA';
+// export const imgSrc =
+//   'https://s3-alpha-sig.figma.com/img/1c6b/bc0b/e719e9d93c02a87ba51308ebb0297cdf?Expires=1634515200&Signature=cHog-gg-LHnZ7Jar-4LBIvEyoSBxR3KrXMF9mU3M1pPPPn44uChuJ4GVz1R96FsJKwMN7-6GcPep9h9JMgb7bW3dfcl56gVnZ6~7SrsFtNvjg0MHRylpstxbh~8Ds94guK09AkHaNicuiBLALimwy7sA~pbFzzEG9NlMIHseaBMQ9Sq47xcZCYz-bDE6hH2KDWtIqOpZ9WRvkNG7fBjhXCm3sdKMg5JsarcBfCshLJFCLJCGpAxAMF36AP4A8e5Tr1wIcl4oHHX4~sdwtNZRAWABWJhNxmc14hCiWX1yZvfU8e~y5-MMh0DJhVdQBnK5Lq9xocs-LAqsx7lDo-shvg__&Key-Pair-Id=APKAINTVSUGEWH5XD5UA';
+
+export const useWorksList = () => {
+  const data = useStaticQuery(
+    graphql`
+      {
+        allContentfulWorks {
+          edges {
+            node {
+              category
+              description {
+                description
+              }
+              id
+              name
+              postedOn
+              workImage {
+                description
+                id
+                title
+                file {
+                  fileName
+                  url
+                }
+              }
+            }
+          }
+        }
+      }
+    `,
+  );
+  return data;
+};
 
 export const FeaturedWorksSide: React.FC<{}> = ({}) => {
   const classes = useFeaturedWorksSideStyles();
-  const works = [1, 2, 3, 4, 5];
-  const featuredWorks = works.slice(works.length - 3);
+  const works = useWorksList();
+  const featuredWorks = works?.slice(works.length - 3);
   return (
     <div className={classes.container}>
       <div className={classes.containerInner}>
@@ -98,27 +131,27 @@ export const FeaturedWorksSide: React.FC<{}> = ({}) => {
           <Typography variant="h6">Featured works</Typography>
         </div>
         <List className={classes.worksList}>
-          {featuredWorks.map((x) => (
-            <>
+          {featuredWorks.map((work, i) => (
+            <div key={i}>
               <ListItem className={classes.workItem} alignItems="flex-start">
                 <div
                   className={classes.workItemImg}
                   style={{
-                    backgroundImage: `url("${imgSrc}")`,
+                    backgroundImage: `url("")`,
                   }}
                 ></div>
                 <ListItemText
-                  primary="Brunch this weekend?"
+                  primary={work.name}
                   className={classes.workItemText}
                   primaryTypographyProps={{
                     className: classes.workItemPrimaryText,
                   }}
                   secondary={
                     <>
-                      <div className={clsx(classes.workItemMiddleSide, 'flexStartCenterRow')}>
-                        <Chip label="2018" className={classes.workItemChip} />
-                        <Typography variant="body1">Illustration</Typography>
-                      </div>
+                      <span className={clsx(classes.workItemMiddleSide, 'flexStartCenterRow')}>
+                        <Chip label={work.postedOn} className={classes.workItemChip} />
+                        <Typography variant="body1">work.</Typography>
+                      </span>
                       <Typography variant="body2" component="p" color="textPrimary">
                         Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
                         consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
@@ -128,7 +161,7 @@ export const FeaturedWorksSide: React.FC<{}> = ({}) => {
                 />
               </ListItem>
               <Divider className={classes.itemDivider} />
-            </>
+            </div>
           ))}
         </List>
       </div>

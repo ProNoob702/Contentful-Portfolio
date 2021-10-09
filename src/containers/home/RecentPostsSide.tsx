@@ -3,7 +3,7 @@ import { useIsMobileView } from '../../hooks/useIsMobileView';
 import { Typography } from '@material-ui/core';
 import { makeStyles } from '@material-ui/core';
 import clsx from 'clsx';
-import { Link } from 'gatsby';
+import { graphql, Link, useStaticQuery } from 'gatsby';
 import Card from '@material-ui/core/Card';
 import CardContent from '@material-ui/core/CardContent';
 import { contentMaxWidth } from '../../constants';
@@ -54,6 +54,32 @@ const useRecentPostsSideStyles = makeStyles((theme) => ({
   },
 }));
 
+export const usePostsList = () => {
+  const data = useStaticQuery(
+    graphql`
+      {
+        allContentfulBlogs {
+          edges {
+            node {
+              id
+              name
+              postedOn
+              theme
+              description {
+                description
+              }
+              postMarkdownText {
+                raw
+              }
+            }
+          }
+        }
+      }
+    `,
+  );
+  return data;
+};
+
 export const RecentPostsSide: React.FC<{}> = ({}) => {
   const isNotMobileView = useIsMobileView();
   const classes = useRecentPostsSideStyles();
@@ -65,8 +91,11 @@ export const RecentPostsSide: React.FC<{}> = ({}) => {
     }
     return null;
   };
-  const posts = [1, 2, 3, 4, 5];
-  const latestPosts = posts.slice(posts.length - 2);
+  const data = usePostsList();
+  const list = data?.allContentfulBlogs?.edges?.map((x) => x.node);
+  console.log('list', list);
+  // const posts = [1, 2, 3, 4, 5];
+  const latestPosts = list.slice(list.length - 2);
   const seperator = <span className={classes.seperator}>|</span>;
   return (
     <div className={classes.container}>
@@ -83,18 +112,17 @@ export const RecentPostsSide: React.FC<{}> = ({}) => {
           ) : null}
         </div>
         <div className={clsx(isNotMobileView ? 'flexStartCenterRow flexWrap' : 'flexColumnCenterCenter')}>
-          {latestPosts.map((x, i) => (
-            <Card className={clsx(classes.card, 'flex-1', getCardClassNameByIndex(i, 2))}>
+          {latestPosts.map((post, i) => (
+            <Card className={clsx(classes.card, 'flex-1', getCardClassNameByIndex(i, 2))} key={i}>
               <CardContent>
                 <Typography variant="h5" className={clsx(classes.cardTitle, classes.txtSpacing)}>
-                  Making a design system from scratch
+                  {post.name}
                 </Typography>
                 <Typography variant="body1" className={classes.txtSpacing}>
-                  12 Feb 2020 {seperator} Design Pattern
+                  {post.postedOn} {seperator} {post.theme}
                 </Typography>
                 <Typography variant="body2" component="p">
-                  Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia consequat duis
-                  enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                  {post.description.description}
                 </Typography>
               </CardContent>
             </Card>
