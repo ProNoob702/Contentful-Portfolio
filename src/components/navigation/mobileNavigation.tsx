@@ -60,7 +60,6 @@ interface MenuProps {
 }
 
 const MobileNavigationMenu: React.FC<MenuProps> = ({ anchor, classes, handleClose }) => {
-  if (!open) return null;
   return (
     <Drawer anchor="right" open={Boolean(anchor)} onClose={handleClose}>
       <div className={classes.menu}>
