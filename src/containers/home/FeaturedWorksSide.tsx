@@ -46,7 +46,8 @@ const useFeaturedWorksSideStyles = makeStyles((theme) => ({
       width: '100%',
     },
     [theme.breakpoints.up('md')]: {
-      width: 250,
+      minWidth: 250,
+      maxWidth: 250,
     },
     height: 180,
     overflow: 'hidden',
@@ -103,7 +104,7 @@ export const FeaturedWorksSide: React.FC<{}> = ({}) => {
                 <div
                   className={classes.workItemImg}
                   style={{
-                    backgroundImage: `url("")`,
+                    backgroundImage: `url(${work.workImage.file.url})`,
                   }}
                 ></div>
                 <ListItemText
@@ -116,10 +117,10 @@ export const FeaturedWorksSide: React.FC<{}> = ({}) => {
                     <>
                       <span className={clsx(classes.workItemMiddleSide, 'flexStartCenterRow')}>
                         <Chip label={getYear(new Date(work.postedOn))} className={classes.workItemChip} />
-                        <Typography variant="body1">{work.postedOn}</Typography>
+                        <Typography variant="body1">{work.category}</Typography>
                       </span>
                       <Typography variant="body2" component="p" color="textPrimary">
-                        {work.description}
+                        {work.description.description}
                       </Typography>
                     </>
                   }

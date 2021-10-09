@@ -3,7 +3,11 @@ export interface WorkPostType {
   name: string;
   postedOn: string;
   category: string;
-  workImage: string;
+  workImage: {
+    file: {
+      url: string;
+    };
+  };
   description: {
     description: string;
   };

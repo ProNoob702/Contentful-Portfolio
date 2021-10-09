@@ -6,7 +6,7 @@ import { WorkPostType } from '../models/WorkPostType';
 
 interface Props {
   params: { id: string };
-  data: { contentfulBlogs: WorkPostType };
+  data: { contentfulWorks: WorkPostType };
 }
 
 export const query = graphql`
@@ -16,7 +16,6 @@ export const query = graphql`
       name
       postedOn
       category
-      workImage
       description {
         description
       }
@@ -29,9 +28,10 @@ export const query = graphql`
 
 const WorkPostDetailTemplate: React.FC<Props> = (props) => {
   const { data } = props;
+  console.log('work', data);
   return (
     <Layout>
-      <WorkDetail work={data.contentfulBlogs} />
+      <WorkDetail work={data.contentfulWorks} />
     </Layout>
   );
 };

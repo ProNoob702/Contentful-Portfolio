@@ -15,6 +15,11 @@ export const useWorksList = (): WorkPostType[] => {
               description {
                 description
               }
+              workImage {
+                file {
+                  url
+                }
+              }
             }
           }
         }

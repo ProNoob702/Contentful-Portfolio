@@ -28,7 +28,7 @@ const useStyles = makeStyles((theme) => ({
     marginTop: theme.spacing(3),
     whiteSpace: 'pre-wrap',
     '& img': {
-      width: '100%',
+      maxWidth: '100%',
     },
     '& p': {
       fontSize: 16,

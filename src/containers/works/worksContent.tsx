@@ -6,6 +6,7 @@ import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'gatsby';
 import { useWorksList } from '../../hooks/useWorksList';
+import { getYear } from 'date-fns';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -54,7 +55,8 @@ const useStyles = makeStyles((theme) => ({
       width: '100%',
     },
     [theme.breakpoints.up('md')]: {
-      width: 250,
+      minWidth: 250,
+      maxWidth: 250,
     },
     height: 180,
     overflow: 'hidden',
@@ -105,15 +107,15 @@ export const WorksContent: React.FC<{}> = () => {
         {posts.map((x) => (
           <>
             <ListItem className={classes.workItem} alignItems="flex-start">
-              <Link to={`/works/${x}`} className={classes.itemLink}>
+              <Link to={`/works/${x.id}`} className={classes.itemLink}>
                 <div
                   className={classes.workItemImg}
                   style={{
-                    backgroundImage: `url("")`,
+                    backgroundImage: `url(${x.workImage.file.url})`,
                   }}
-                ></div>
+                />
                 <ListItemText
-                  primary="Brunch this weekend?"
+                  primary={x.name}
                   className={classes.workItemText}
                   primaryTypographyProps={{
                     className: classes.workItemPrimaryText,
@@ -121,12 +123,11 @@ export const WorksContent: React.FC<{}> = () => {
                   secondary={
                     <>
                       <div className={clsx(classes.workItemMiddleSide, 'flexStartCenterRow')}>
-                        <Chip label="2018" className={classes.workItemChip} />
-                        <Typography variant="body1">Illustration</Typography>
+                        <Chip label={getYear(new Date(x.postedOn))} className={classes.workItemChip} />
+                        <Typography variant="body1">{x.category}</Typography>
                       </div>
                       <Typography variant="body2" component="p" color="textPrimary">
-                        Amet minim mollit non deserunt ullamco est sit aliqua dolor do amet sint. Velit officia
-                        consequat duis enim velit mollit. Exercitation veniam consequat sunt nostrud amet.
+                        {x.description.description}
                       </Typography>
                     </>
                   }
