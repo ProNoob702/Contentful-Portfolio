@@ -5,6 +5,7 @@ import clsx from 'clsx';
 import List from '@material-ui/core/List';
 import Divider from '@material-ui/core/Divider';
 import { Link } from 'gatsby';
+import { useWorksList } from '../../hooks/useWorksList';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -94,7 +95,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const WorksContent: React.FC<{}> = () => {
   const classes = useStyles();
-  const posts = [1, 2, 3, 4, 5];
+  const posts = useWorksList();
   return (
     <div className={classes.container}>
       <Typography variant="h4" className={classes.pageTitle}>

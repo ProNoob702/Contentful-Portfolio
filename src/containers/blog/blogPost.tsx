@@ -49,7 +49,7 @@ const useStyles = makeStyles((theme) => ({
 
 export const BlogPost: React.FC<{ post: BlogPostType }> = ({ post }) => {
   const classes = useStyles();
-  const html = marked(post.markdownText.markdownText || ''); // post.markdownText
+  const html = marked(post.markdownText.markdownText || '');
   return (
     <div className={classes.container}>
       <Typography variant="h4" className={classes.pageTitle}>

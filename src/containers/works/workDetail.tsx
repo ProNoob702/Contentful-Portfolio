@@ -1,7 +1,9 @@
 import React from 'react';
 import { Chip, makeStyles, Typography } from '@material-ui/core';
-import { contentMaxWidth, sampleMarkdown } from '../../constants';
+import { contentMaxWidth } from '../../constants';
 import marked from 'marked';
+import { WorkPostType } from '../../models/WorkPostType';
+import { getYear } from 'date-fns';
 
 const useStyles = makeStyles((theme) => ({
   container: {
@@ -48,17 +50,17 @@ const useStyles = makeStyles((theme) => ({
   },
 }));
 
-const html = marked(sampleMarkdown || '');
-export const WorkDetail: React.FC<{}> = () => {
+export const WorkDetail: React.FC<{ work: WorkPostType }> = ({ work }) => {
   const classes = useStyles();
+  const html = marked(work.markdownText.markdownText || '');
   return (
     <div className={classes.container}>
       <Typography variant="h4" className={classes.pageTitle}>
-        Brunch this weekend?
+        {work.name}
       </Typography>
       <div className="flexRow">
-        <Chip label="2018" className={classes.workChip} color="primary" />
-        <Typography variant="body1">Illustration</Typography>
+        <Chip label={getYear(new Date(work.postedOn))} className={classes.workChip} color="primary" />
+        <Typography variant="body1">{work.category}</Typography>
       </div>
       <div className={classes.postDes}>
         <div dangerouslySetInnerHTML={{ __html: html }} />

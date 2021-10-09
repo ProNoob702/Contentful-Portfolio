@@ -26,7 +26,7 @@ export const query = graphql`
   }
 `;
 
-const BlogPostDetail: React.FC<Props> = (props) => {
+const BlogPostDetailTemplate: React.FC<Props> = (props) => {
   const { data } = props;
   return (
     <Layout>
@@ -35,4 +35,4 @@ const BlogPostDetail: React.FC<Props> = (props) => {
   );
 };
 
-export default BlogPostDetail;
+export default BlogPostDetailTemplate;
